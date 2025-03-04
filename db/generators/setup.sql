@@ -58,3 +58,24 @@ create table user (
 	profile int not null default 99,
 	bio text not null
 );
+
+create table course (
+    course varchar(64) unique not null
+);
+
+create table exam (
+    email varchar(64) not null,
+    course varchar(64) not null,
+    grade int not null
+        check(grade between -3 and 12),
+    juncture datetime not null,
+    primary key(email, course, juncture),
+    foreign key(email) references user(email),
+    foreign key(course) references course(course)
+);
+
+insert into course values('Data Security');
+insert into course values('Data Integration');
+insert into course values('Integrated Development Environments');
+insert into course values('Web programming I');
+insert into course values('Web Programming II');
